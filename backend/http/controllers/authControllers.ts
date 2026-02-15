@@ -1,7 +1,7 @@
 import type { Request, Response } from "express";
-import { prisma } from "../db/lib";
+import { prisma } from "../../db/lib";
 import bcrypt from "bcrypt";
-import { registerSchema, LoginSchema } from "../schemas/autrhSchema";
+import { registerSchema, LoginSchema } from "../../schemas/autrhSchema";
 import jwt from 'jsonwebtoken';
 
 export const regsiterController = async (req: Request, res: Response) => {

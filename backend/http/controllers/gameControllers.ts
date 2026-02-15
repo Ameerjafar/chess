@@ -1,5 +1,5 @@
 import type { Request, Response } from "express";
-import { prisma } from '../db/lib'
+import { prisma } from '../../db/lib'
 export const getAllGamesController = async (req: Request, res: Response) => {
   const userId = req.userId;
 

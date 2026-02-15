@@ -8,4 +8,4 @@ export const routes = Router();
 
 routes.use('/auth', authRoutes);
 routes.use('/room', verifyToken, roomRoutes);
-routes.use('/game', verifyToken,gameRoutes)
+routes.use('/game', verifyToken, gameRoutes);

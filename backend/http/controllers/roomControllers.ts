@@ -1,6 +1,6 @@
 import type { Request, Response } from 'express';
-import { prisma } from '../db/lib';
-import { redis } from '../db/cache';
+import { prisma } from '../../db/lib';
+import { redis } from '../../db/cache';
 
 export const createRoomController = async (req: Request, res: Response) => {
     const userId = req.userId;
