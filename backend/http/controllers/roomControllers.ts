@@ -10,15 +10,6 @@ export const createRoomController = async (req: Request, res: Response) => {
         if (!time || !roomId) {
             return res.status(400).json({ success: false, data: null, error: "INVALID_REQUEST" });
         }
-
-        const roomData = {
-            time,
-            player1Id: userId,
-            isFull: false,
-        };
-
-        await redis.set(roomId, JSON.stringify(roomData), "EX", 3600);
-
         const game = await prisma.game.create({
             data: {
                 player1Id: userId,
@@ -55,14 +46,9 @@ export const joinRoomController = async (req: Request, res: Response) => {
             return res.status(403).json({ success: false, data: null, error: "ROOM_ALREADY_FULL" });
         }
 
-        if (roomData.player1Id === userId) {
+        else if (roomData.player1Id === userId) {
             return res.status(400).json({ success: false, data: null, error: "CANNOT_JOIN_YOUR_OWN_ROOM" });
         }
-
-        roomData.player2Id = userId;
-        roomData.isFull = true;
-
-        await redis.set(roomId as string, JSON.stringify(roomData), "EX", 3600);
 
         await prisma.game.update({
             where: { id: roomId as string },
